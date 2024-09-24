@@ -2,8 +2,20 @@ name: Daily Check-in
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天0点 UTC 时间执行
+    - cron: '0 0 * * *'  # 每天 0 点 UTC 时间执行
+    - cron: '0 2 * * *'  # 每天 2 点 UTC 时间执行
+    - cron: '0 4 * * *'  # 每天 4 点 UTC 时间执行
+    - cron: '0 6 * * *'  # 每天 6 点 UTC 时间执行
+    - cron: '0 8 * * *'  # 每天 8 点 UTC 时间执行
+    - cron: '0 10 * * *'  # 每天 10 点 UTC 时间执行
+    - cron: '0 12 * * *'  # 每天 12 点 UTC 时间执行
+    - cron: '0 14 * * *'  # 每天 14 点 UTC 时间执行
+    - cron: '0 16 * * *'  # 每天 16 点 UTC 时间执行
+    - cron: '0 18 * * *'  # 每天 18 点 UTC 时间执行
+    - cron: '0 20 * * *'  # 每天 20 点 UTC 时间执行
+    - cron: '0 22 * * *'  # 每天 22 点 UTC 时间执行
   workflow_dispatch:
+
 
 jobs:
   run_script:
