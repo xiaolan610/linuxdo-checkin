@@ -51,7 +51,7 @@ class LinuxDoBrowser:
     def run(self):
         if not self.login():
             return
-        for i range(1000):在 
+        for i in range(1000):在 
             self.click_topic()
         self.print_connect_info()
 
