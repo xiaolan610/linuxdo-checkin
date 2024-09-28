@@ -134,9 +134,6 @@ if __name__ == "__main__":
     if not ENCRYPTED_CLASH_CONFIG_URL:
         print("Please set a valid ENCRYPTED_CLASH_CONFIG_URL")
         exit(1)
-    if not ENCRYPTION_KEY:
-        print("Please set a valid ENCRYPTION_KEY")
-        exit(1)
     
     l = LinuxDoBrowser()
     l.run()
