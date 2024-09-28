@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 
 USERNAME = os.environ.get("USERNAME")
 PASSWORD = os.environ.get("PASSWORD")
-CLASH_CONFIG_URL = os.environ.get("CLASH_CONFIG_URL")
+CLASH_CONFIG_URL ="https://xn--cp3a08l.com/api/v1/client/subscribe?token=85dcb89d98bc878a6b1574699ab13adc&flag=meta"
 
 HOME_URL = "https://linux.do/"
 
