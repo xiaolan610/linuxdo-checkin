@@ -1,23 +1,22 @@
 import os
 import time
 import random
-import threading
-import requests
-import yaml
 
 from tabulate import tabulate
 from playwright.sync_api import sync_playwright
 
+
 USERNAME = os.environ.get("USERNAME")
 PASSWORD = os.environ.get("PASSWORD")
-CLASH_CONFIG_URL ="https://xn--cp3a08l.com/api/v1/client/subscribe?token=85dcb89d98bc878a6b1574699ab13adc&flag=meta"
+
 
 HOME_URL = "https://linux.do/"
 
+
 class LinuxDoBrowser:
-    def __init__(self, proxy) -> None:
+    def __init__(self) -> None:
         self.pw = sync_playwright().start()
-        self.browser = self.pw.firefox.launch(headless=True, proxy={"server": proxy} if proxy else None)
+        self.browser = self.pw.firefox.launch(headless=True)
         self.context = self.browser.new_context()
         self.page = self.context.new_page()
         self.page.goto(HOME_URL)
@@ -40,23 +39,14 @@ class LinuxDoBrowser:
             return True
 
     def click_topic(self):
-        topics = self.page.query_selector_all("#list-area .title")
-        threads = []
-        for topic in topics:
-            thread = threading.Thread(target=self.process_topic, args=(topic,))
-            threads.append(thread)
-            thread.start()
-        for thread in threads:
-            thread.join()
-
-    def process_topic(self, topic):
-        page = self.context.new_page()
-        page.goto(HOME_URL + topic.get_attribute("href"))
-        time.sleep(3)
-        if random.random() < 0.02:  # 100 * 0.02 * 30 = 60
-            self.click_like(page)
-        time.sleep(3)
-        page.close()
+        for topic in self.page.query_selector_all("#list-area .title"):
+            page = self.context.new_page()
+            page.goto(HOME_URL + topic.get_attribute("href"))
+            time.sleep(3)
+            if random.random() < 0.02:  # 100 * 0.02 * 30 = 60
+                self.click_like(page)
+            time.sleep(3)
+            page.close()
 
     def run(self):
         if not self.login():
@@ -88,25 +78,10 @@ class LinuxDoBrowser:
 
         page.close()
 
-def fetch_clash_config(url):
-    response = requests.get(url)
-    response.raise_for_status()
-    return response.text
-
-def load_proxies_from_yaml(yaml_content):
-    config = yaml.safe_load(yaml_content)
-    return config['proxies']
 
 if __name__ == "__main__":
     if not USERNAME or not PASSWORD:
         print("Please set USERNAME and PASSWORD")
         exit(1)
-
-    yaml_content = fetch_clash_config(CLASH_CONFIG_URL)
-    proxies = load_proxies_from_yaml(yaml_content)
-    for proxy in proxies:
-        proxy_server = f"http://{proxy['server']}:{proxy['port']}"
-        print(f"Using proxy: {proxy['name']} ({proxy_server})")
-        l = LinuxDoBrowser(proxy=proxy_server)
-        l.run()
-        break  # Remove this break if you want to iterate over all proxies
+    l = LinuxDoBrowser()
+    l.run()
