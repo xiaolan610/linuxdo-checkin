@@ -11,7 +11,7 @@ from playwright.sync_api import sync_playwright
 # 从环境变量获取用户名、密码和加密的配置URL
 USERNAME = os.environ.get("USERNAME")
 PASSWORD = os.environ.get("PASSWORD")
-ENCRYPTED_CLASH_CONFIG_URL = os.environ.get("ENCRYPTED_CLASH_CONFIG_URL")
+ENCRYPTED_CLASH_CONFIG_URL = "gAAAAABm90lkN9RitlocedJ-AtZMRIzkChSpKflTgW6I8vRyPy18zxDTIkzoudQnnqTe1SnWKWHhRt-qG9W8XvPKI_R41yFaf7lxLsjhmmRn1qigKSxcb1XyWi5GZoeYGy9ruHeoqPDkbD-6GlfMy0jBYjt4TXFDWW4gysENhJFffpF4L1vokotqVK1UxYMqn9FChPzvw50hsr8EkaJHvSRqyWJsEKXF8Q=="
 ENCRYPTION_KEY = os.environ.get("ENCRYPTION_KEY")  # 加密密钥
 
 HOME_URL = "https://linux.do/"
