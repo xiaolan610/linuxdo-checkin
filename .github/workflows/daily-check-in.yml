@@ -49,5 +49,6 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          CLASH_CONFIG_URL: ${{ secrets.CLASH_CONFIG_URL }}
         run: |
           python main.py
